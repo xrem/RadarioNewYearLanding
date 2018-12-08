@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using NewYearLanding.Model;
 
@@ -7,6 +8,7 @@ namespace NewYearLanding.DAL.Mongo {
         private readonly IMongoDatabase _database = null;
 
         public MongoDbContext(IOptions<MongoDbConnectionSettings> settings) {
+            BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
             var client = new MongoClient(settings.Value.ConnectionString);
             _database = client.GetDatabase(settings.Value.Database);
         }

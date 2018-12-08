@@ -3,6 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -18,6 +19,7 @@ namespace NewYearLanding.Controllers {
         public object Data { get; set; }
     }
 
+    [AllowAnonymous]
     public class CompanyController : BaseController {
         private readonly ICompaniesRepository _repository;
         private readonly string _webRootPath;
@@ -61,6 +63,9 @@ namespace NewYearLanding.Controllers {
                     result.Error = "Company not found";
                 } else {
                     result.Success = true;
+                    if (company.PublicGuid == guid) {
+                        company.FullAccessGuid = Guid.Empty;
+                    }
                     result.Data = company;
                 }
             }

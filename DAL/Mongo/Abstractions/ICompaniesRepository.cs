@@ -5,7 +5,7 @@ using NewYearLanding.Model;
 
 namespace NewYearLanding.DAL.Mongo.Abstractions {
     public interface ICompaniesRepository {
-        Task<IEnumerable<Company>> GetAllCompanies();
+        Task<List<Company>> GetAllCompanies();
         Task<Company> GetCompanyByGuid(Guid guid);
         Task<Company> GetCompanyById(int companyId);
         Task<bool> Update(Company company);

@@ -14,7 +14,7 @@ namespace NewYearLanding.DAL.Mongo.Implementation {
             _context = new MongoDbContext(settings);
         }
 
-        public async Task<IEnumerable<Company>> GetAllCompanies() {
+        public async Task<List<Company>> GetAllCompanies() {
             return await _context.Companies.Find(_ => true).ToListAsync();
         }
 
