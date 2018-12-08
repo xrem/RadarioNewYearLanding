@@ -1,12 +1,14 @@
 using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NewYearLanding.DAL.Mongo.Abstractions;
+using NewYearLanding.DAL.RadarioSQL;
 using NewYearLanding.Infrastructure;
 
 namespace NewYearLanding.Controllers {
@@ -16,11 +18,13 @@ namespace NewYearLanding.Controllers {
         public object Data { get; set; }
     }
 
-    public class CompanyController : Controller {
+    public class CompanyController : BaseController {
         private readonly ICompaniesRepository _repository;
         private readonly string _webRootPath;
 
-        public CompanyController(ICompaniesRepository repository, IHostingEnvironment env) {
+        public CompanyController(ICompaniesRepository repository,
+                                 IHostingEnvironment env,
+                                 IModelFacade modelFacade) : base(modelFacade) {
             _repository = repository;
             _webRootPath = env.WebRootPath;
         }
@@ -60,12 +64,7 @@ namespace NewYearLanding.Controllers {
                     result.Data = company;
                 }
             }
-            return new JsonResult(result, new JsonSerializerSettings {
-                Formatting = Formatting.Indented,
-                ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                Culture = CultureInfo.InvariantCulture,
-                MissingMemberHandling = MissingMemberHandling.Ignore
-            });
+            return new JsonResult(result, JsonSerializerSettings);
         }
     }
 }

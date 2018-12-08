@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using NewYearLanding.DAL.Mongo;
 using NewYearLanding.DAL.Mongo.Abstractions;
 using NewYearLanding.DAL.Mongo.Implementation;
+using NewYearLanding.DAL.RadarioSQL;
 
 namespace NewYearLanding {
     public class Startup {
@@ -32,7 +33,9 @@ namespace NewYearLanding {
                     options.Database = Config["MongoDb:Database"];
                 });
             services.AddLogging(f => f.AddConsole());
+            services.AddSingleton(Config);
             services.AddTransient<ICompaniesRepository, CompaniesRepository>();
+            services.AddTransient<IModelFacade, ModelFacade>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
