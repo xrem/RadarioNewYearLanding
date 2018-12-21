@@ -80,6 +80,7 @@ namespace NewYearLanding {
             }
 
             app.UseAuthentication();
+            app.UseStaticFiles();
 
             app.UseMvc();
         }
