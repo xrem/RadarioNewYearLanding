@@ -14,5 +14,7 @@ namespace NewYearLanding.DAL.Mongo {
         }
 
         public IMongoCollection<Company> Companies => _database.GetCollection<Company>(nameof(Companies).ToLower());
+
+        public IMongoCollection<Statistics> Statistics => _database.GetCollection<Statistics>(nameof(Statistics).ToLower());
     }
 }

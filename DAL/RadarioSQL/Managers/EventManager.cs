@@ -1,22 +1,20 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using NewYearLanding.DAL.RadarioSQL.DTO;
 
 namespace NewYearLanding.DAL.RadarioSQL.Managers {
     public class EventManager : BaseManager {
         public EventManager(SqlDbContext requester) : base(requester) { }
 
-        public class AggregatedEventCountByCompany {
-            public int CompanyId { get; set; }
-            public int EventCount { get; set; }
-        }
-
-        public IEnumerable<AggregatedEventCountByCompany> GetAggregatedEventCountByCompany() {
+        public List<ImagesByTitle> GetImagesByEventIds(IEnumerable<int> eventIds) {
             var sb = new StringBuilder();
-            sb.AppendLine("SELECT CompanyId, Count(1) as EventCount");
-            sb.AppendLine("FROM [Radario].[dbo].[EventComplexLite]");
-            sb.AppendLine("WHERE DateAdd(hour, GmtOffset, BeginDate)>'2018-01-01T00:00:00.000Z'");
-            sb.AppendLine("GROUP BY CompanyId");
-            return Requester.Query<AggregatedEventCountByCompany>(sb.ToString());
+            sb.AppendLine("SELECT Title, Images FROM [Event]");
+            sb.AppendLine("WHERE Id IN @ids");
+            sb.AppendLine("AND Images IS NOT NULL AND Len(Images)>4");
+            return Requester.Query<ImagesByTitle>(sb.ToString(), new {
+                ids = eventIds
+            }).ToList();
         }
     }
 }

@@ -12,6 +12,7 @@ using NewYearLanding.DAL.Mongo;
 using NewYearLanding.DAL.Mongo.Abstractions;
 using NewYearLanding.DAL.Mongo.Implementation;
 using NewYearLanding.DAL.RadarioSQL;
+using NewYearLanding.Model;
 using ZNetCS.AspNetCore.Authentication.Basic;
 using ZNetCS.AspNetCore.Authentication.Basic.Events;
 
@@ -46,6 +47,7 @@ namespace NewYearLanding {
             services.AddLogging(f => f.AddConsole());
             services.AddSingleton(Config);
             services.AddTransient<ICompaniesRepository, CompaniesRepository>();
+            services.AddTransient<IStatisticsRepository, StatisticsRepository>();
             services.AddTransient<IModelFacade, ModelFacade>();
 
             services

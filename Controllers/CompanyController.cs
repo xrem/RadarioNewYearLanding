@@ -23,14 +23,17 @@ namespace NewYearLanding.Controllers {
 
     [AllowAnonymous]
     public class CompanyController : BaseController {
-        private readonly ICompaniesRepository _repository;
+        private readonly ICompaniesRepository _hostRepo;
+        private readonly IStatisticsRepository _statsRepo;
         private readonly string _webRootPath;
         private static readonly Random Random;
 
-        public CompanyController(ICompaniesRepository repository,
+        public CompanyController(ICompaniesRepository hostRepo,
+                                 IStatisticsRepository statsRepo,
                                  IHostingEnvironment env,
                                  IModelFacade modelFacade) : base(modelFacade) {
-            _repository = repository;
+            _hostRepo = hostRepo;
+            _statsRepo = statsRepo;
             _webRootPath = env.WebRootPath;
         }
 
@@ -113,11 +116,11 @@ namespace NewYearLanding.Controllers {
             if (!Guid.TryParse(req, out Guid guid)) {
                 result.Error = "Guid not provided";
             } else {
-                var company = await _repository.GetCompanyByGuid(guid);
+                var company = await _hostRepo.GetCompanyByGuid(guid);
                 if (company == null) {
                     result.Error = "Company not found";
                 } else {
-                    var statistics = GetStatisticsMockObject(company);
+                    var statistics = await _statsRepo.GetStatisticsByCompanyId(company.CompanyId);
                     result.Data = Map(company, statistics, guid);
                     result.Success = true;
                 }
