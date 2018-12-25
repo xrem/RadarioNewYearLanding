@@ -2,8 +2,8 @@
     <div class="cover">
         <div class="logo">
             <span class="logo-img"></span>
-            <span class="logo-cross"></span>
-            <img :src="host.logo" :alt="host.hostname" class="logo-host">
+            <span class="logo-cross" v-if="host.logo !== ''"></span>
+            <img v-if="host.logo !== ''" :src="host.logo" :alt="host.hostname" class="logo-host">
         </div>
         <p class="title">
             {{ this.host.hostname }}! Поздравляем вас<br>
@@ -31,10 +31,10 @@
 <style scoped>
     .cover {
         padding: 200px 30px 120px;
-        background: #e7e9ee url('../assets/confetty.svg') center;
-        background-size: cover;
         text-align: center;
         border-radius: 10px 10px 0 0;
+        animation: fire 2s ease-in-out forwards;
+        animation-delay: .5s;
     }
 
     .logo {
@@ -71,6 +71,21 @@
         font-weight: 400;
         line-height: 30px;
         margin-bottom: 50px;
+    }
+
+    @keyframes fire {
+        0% {
+            background: #e7e9ee url('../assets/confetty.svg') 50% calc(100% + 50px) no-repeat;
+            background-size: 10px;
+        }
+        40% {
+            background: #e7e9ee url('../assets/confetty.svg') 50% 80% no-repeat;
+            background-size: 50px;
+        }
+        100% {
+            background: #e7e9ee url('../assets/confetty.svg') 50% no-repeat;
+            background-size: 100%;
+        }
     }
 
     @media (max-width: 767px) {

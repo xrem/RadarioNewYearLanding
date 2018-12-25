@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Background/>
+        <Background :covers="host.eventsCovers"/>
         <div class="container">
             <Cover :host="host"/>
             <Stat :year="host.year" id="stat-1"/>
@@ -21,8 +21,8 @@
     import Cover from "./components/Cover";
     import Stat from "./components/Stat";
     import Footer from "./components/Footer";
-    import axios from 'axios';
     import Background from "./components/Background";
+    import axios from 'axios';
 
     export default {
         name: 'app',
@@ -34,31 +34,31 @@
 
         },
         data() {
-            return ({
+            return {
                 host: {
-                    hostname: 'Хостнейм',
-                    logo: '/img/logohost.png',
-                    eventsCovers: ['/img/cover1.png', '/img/cover2.png'],
+                    hostname: '',
+                    logo: '',
+                    eventsCovers: [],
                     year: {
-                        events: 114,
-                        tickets: 2113444,
-                        money: 203113444
+                        events: null,
+                        tickets: null,
+                        money: null
                     },
-                    bestMonth: 'Июль',
-                    bestTime: '17:00',
-                    bestDay: 'Пятница',
-                    bestChannel: 'Виджет, касса и билетный стол'
+                    bestMonth: '',
+                    bestTime: '',
+                    bestDay: '',
+                    bestChannel: ''
                 }
-            });
-        },
-        computed: {
-            test: () => {
-                axios.post(`/${window.location.pathname.replace('/', '')}/`)
-                    .then(res => res.data)
-                    .catch(err => {
-                        console.error(err)
-                    })
             }
+        },
+        created() {
+            axios.post(`/${window.location.pathname.replace('/', '')}/`)
+                .then(res => {
+                    this.host = res.data.data;
+                })
+                .catch(err => {
+                    console.error(err)
+                })
         }
     }
 </script>
@@ -92,11 +92,21 @@
     }
 
     .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: 40px;
         line-height: 50px;
         font-weight: 700;
         color: #111;
         margin-bottom: 30px;
+    }
+    .title img {
+        height: 40px;
+        margin-left: 20px;
+    }
+    .title_cap {
+        text-transform: capitalize;
     }
     .subtitle {
         opacity: 0.8;

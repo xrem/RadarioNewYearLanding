@@ -18,21 +18,21 @@
 
         <div class="row" v-if="month">
             <div class="col">
-                <div class="title">{{month}}</div>
+                <div class="title title_cap">{{month}} <img :src="monthImg(month)" alt=""></div>
                 <div class="subtitle">был самым ударным месяцем по продаже билетов</div>
             </div>
         </div>
 
         <div class="row" v-if="time">
             <div class="col">
-                <div class="title">{{time}}</div>
+                <div class="title">{{time}} <img :src="timeImg(time)" alt=""></div>
                 <div class="subtitle">“час пик” для продаж ваших билетов</div>
             </div>
         </div>
 
         <div class="row" v-if="day">
             <div class="col">
-                <div class="title">{{day}}</div>
+                <div class="title title_cap">{{day}}</div>
                 <div class="subtitle">в этот день покупали чаще всего</div>
             </div>
         </div>
@@ -47,8 +47,69 @@
 </template>
 
 <script>
+    import winter from '../assets/seasons/winter.png';
+    import spring from '../assets/seasons/spring.png';
+    import summer from '../assets/seasons/summer.png';
+    import fall from '../assets/seasons/fall.png';
+    import one from '../assets/time/1-13.png';
+    import two from '../assets/time/2-14.png';
+    import three from '../assets/time/3-15.png';
+    import four from '../assets/time/4-16.png';
+    import five from '../assets/time/5-17.png';
+    import six from '../assets/time/6-18.png';
+    import seven from '../assets/time/7-19.png';
+    import eight from '../assets/time/8-20.png';
+    import nine from '../assets/time/9-21.png';
+    import ten from '../assets/time/10-22.png';
+    import eleven from '../assets/time/11-23.png';
+    import twelve from '../assets/time/12-00.png';
+
     export default {
         name: "Stat",
+        data() {
+            return {
+                seasons: {
+                    'январь': winter,
+                    'февраль': winter,
+                    'март': spring,
+                    'апрель': spring,
+                    'май': spring,
+                    'июнь': summer,
+                    'июль': summer,
+                    'август': summer,
+                    'сентябрь': fall,
+                    'октябрь': fall,
+                    'ноябрь': fall,
+                    'декабрь': winter,
+                },
+                hours: {
+                    '1': one,
+                    '13': one,
+                    '2': two,
+                    '14': two,
+                    '3': three,
+                    '15': three,
+                    '4': four,
+                    '16': four,
+                    '5': five,
+                    '17': five,
+                    '6': six,
+                    '18': six,
+                    '7': seven,
+                    '19': seven,
+                    '8': eight,
+                    '20': eight,
+                    '9': nine,
+                    '21': nine,
+                    '10': ten,
+                    '22': ten,
+                    '11': eleven,
+                    '23': eleven,
+                    '12': twelve,
+                    '0': twelve,
+                }
+            }
+        },
         props: {
             year: {
                 type: Object
@@ -70,7 +131,14 @@
             formatPrice(value) {
                 let val = (value/1);
                 return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+            },
+            monthImg: function(month) {
+                return this.seasons[month.toLowerCase()];
+            },
+            timeImg: function(time) {
+                return this.hours[time.split(':')[0]];
             }
+
         }
     }
 </script>
@@ -105,7 +173,6 @@
     }
 
     .title {
-        white-space: nowrap;
         margin-bottom: 25px;
     }
 
