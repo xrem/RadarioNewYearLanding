@@ -33,8 +33,9 @@
         padding: 200px 30px 120px;
         text-align: center;
         border-radius: 10px 10px 0 0;
+        background: #e7e9ee;
         animation: fire 2s ease-in-out forwards;
-        animation-delay: 3s;
+        animation-delay: 2s;
     }
 
     .logo {

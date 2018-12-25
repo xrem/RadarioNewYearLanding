@@ -5,12 +5,12 @@
             <Cover :host="host"/>
             <Stat :year="host.year" id="stat-1"/>
             <hr>
-            <Stat :month="host.bestMonth"/>
-            <hr>
-            <Stat :time="host.bestTime"/>
-            <hr>
-            <Stat :day="host.bestDay"/>
-            <Stat :channel="host.bestChannel"/>
+            <Stat v-if="host.bestMonth" :month="host.bestMonth"/>
+            <hr v-if="host.bestMonth">
+            <Stat v-if="host.bestTime" :time="host.bestTime"/>
+            <hr v-if="host.bestTime">
+            <Stat v-if="host.bestDay" :day="host.bestDay"/>
+            <Stat v-if="host.bestChannel" :channel="host.bestChannel"/>
             <Footer/>
         </div>
     </div>
