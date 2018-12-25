@@ -32,7 +32,7 @@
 
         <div class="row" v-if="day">
             <div class="col">
-                <div class="title title_cap">{{day}}</div>
+                <div class="title title_cap">{{day}} <img :src="dayImg(day)" alt=""></div>
                 <div class="subtitle">в этот день покупали чаще всего</div>
             </div>
         </div>
@@ -63,6 +63,13 @@
     import ten from '../assets/time/10-22.png';
     import eleven from '../assets/time/11-23.png';
     import twelve from '../assets/time/12-00.png';
+    import mon from '../assets/days/mon.png';
+    import tue from '../assets/days/tue.png';
+    import wed from '../assets/days/wed.png';
+    import thu from '../assets/days/thu.png';
+    import fri from '../assets/days/fri.png';
+    import sun from '../assets/days/sun.png';
+    import sat from '../assets/days/sat.png';
 
     export default {
         name: "Stat",
@@ -107,6 +114,15 @@
                     '23': eleven,
                     '12': twelve,
                     '0': twelve,
+                },
+                days: {
+                    'понедельник': mon,
+                    'вторник': tue,
+                    'среда': wed,
+                    'четверг': thu,
+                    'пятница': fri,
+                    'суббота': sun,
+                    'воскресеньк': sat,
                 }
             }
         },
@@ -137,6 +153,9 @@
             },
             timeImg: function(time) {
                 return this.hours[time.split(':')[0]];
+            },
+            dayImg: function(day) {
+                return this.days[day.toLowerCase()];
             }
 
         }

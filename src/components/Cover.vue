@@ -77,15 +77,18 @@
 
     @keyframes fire {
         0% {
-            background: #e7e9ee url('../assets/confetty.svg') 50% calc(100% + 50px) no-repeat;
+            background: #e7e9ee url('../assets/confetty.svg') 50% calc(100% + 50px);
+            background-repeat: no-repeat;
             background-size: 10px;
         }
         40% {
-            background: #e7e9ee url('../assets/confetty.svg') 50% 80% no-repeat;
+            background: #e7e9ee url('../assets/confetty.svg') 50% 80%;
+            background-repeat: no-repeat;
             background-size: 50px;
         }
         100% {
-            background: #e7e9ee url('../assets/confetty.svg') 50% no-repeat;
+            background: #e7e9ee url('../assets/confetty.svg') 50%;
+            background-repeat: no-repeat;
             background-size: 100%;
         }
     }
