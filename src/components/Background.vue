@@ -1,7 +1,7 @@
 <template>
-    <div class="background">
-        <div v-if="covers.length > 0" class="background-cover" v-for="cover in covers" :style="{'background-image': `url(${cover})`}"></div>
-        <div v-else class="background-pattern">
+    <div class="background" :class="{'background_light': covers.length === 0}">
+        <div class="background-cover" v-for="cover in covers" :style="{'background-image': `url(${cover})`}"></div>
+        <div v-if="covers.length === 0" class="background-pattern">
             <div class="background-pattern__child"></div>
             <div class="background-pattern__column">
                 <div class="background-pattern__child"></div>
@@ -35,6 +35,9 @@
         display: flex;
         flex-wrap: wrap;
         filter: brightness(80%);
+    }
+    .background_light {
+        filter: brightness(100%);
     }
 
     .background-cover {
