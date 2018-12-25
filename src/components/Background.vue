@@ -1,7 +1,7 @@
 <template>
     <div class="background">
         <div v-if="covers.length > 0" class="background-cover" v-for="cover in covers" :style="{'background-image': `url(${cover})`}"></div>
-        <div class="background-pattern" v-else>
+        <div v-else class="background-pattern">
             <div class="background-pattern__child"></div>
             <div class="background-pattern__column">
                 <div class="background-pattern__child"></div>
