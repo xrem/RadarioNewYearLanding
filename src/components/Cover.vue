@@ -34,7 +34,7 @@
         text-align: center;
         border-radius: 10px 10px 0 0;
         animation: fire 2s ease-in-out forwards;
-        animation-delay: .5s;
+        animation-delay: 3s;
     }
 
     .logo {
@@ -52,12 +52,14 @@
     .logo-cross {
         width: 15px;
         height: 15px;
-        margin: 0 10px;
+        margin: 0 10px -10px;
         background: url('../assets/cross.svg') center no-repeat;
     }
     .logo-host {
         max-height: 33px;
         object-fit: contain;
+        margin-bottom: -10px;
+        border-radius: 50%;
     }
 
     .title {

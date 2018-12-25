@@ -55,10 +55,11 @@
             axios.post(`/${window.location.pathname.replace('/', '')}/`)
                 .then(res => {
                     this.host = res.data.data;
+                    document.querySelector('title').textContent = `С Новым годом, ${this.host.hostname}!`;
                 })
                 .catch(err => {
                     console.error(err)
-                })
+                });
         }
     }
 </script>
