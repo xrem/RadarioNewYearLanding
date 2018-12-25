@@ -70,12 +70,12 @@ namespace NewYearLanding.Controllers {
 
         [HttpGet]
         [Route("stats")]
-        public async Task<JsonResult> SyncStatistics() {
+        public async Task<JsonResult> SyncStatistics(int? from) {
             var stats = await _statisticsRepository.GetAllCompaniesStatistics();
             var radarioCompanies = mf.CompanyManager.GetAllCompanies();
             var updateCount = 0;
             var insertCount = 0;
-            foreach (var radarioCompany in radarioCompanies.Where(x => x.Id > 5980)) {
+            foreach (var radarioCompany in radarioCompanies.Where(x => x.Id > from.GetValueOrDefault())) {
                 var entity = stats.SingleOrDefault(x => x.CompanyId == radarioCompany.Id);
                 var shouldInsert = entity == null;
                 entity = entity ?? new Statistics();
