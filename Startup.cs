@@ -46,6 +46,7 @@ namespace NewYearLanding {
                 });
             services.AddLogging(f => f.AddConsole());
             services.AddSingleton(Config);
+            services.AddHttpClient();
             services.AddTransient<ICompaniesRepository, CompaniesRepository>();
             services.AddTransient<IStatisticsRepository, StatisticsRepository>();
             services.AddTransient<IModelFacade, ModelFacade>();

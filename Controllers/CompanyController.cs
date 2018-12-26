@@ -88,6 +88,7 @@ namespace NewYearLanding.Controllers {
         }
 
         public DataViewModel Map(Company c, Statistics s, Guid g) {
+            s.Year.Money = Math.Round(s.Year.Money, 0);
             return new DataViewModel {
                 Logo = s.Logo,
                 Year = s.Year,
