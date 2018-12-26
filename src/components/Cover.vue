@@ -1,5 +1,6 @@
 <template>
     <div class="cover">
+        <div class="confetti"></div>
         <div class="logo">
             <span class="logo-img"></span>
             <span class="logo-cross" v-if="host.logo !== ''"></span>
@@ -34,10 +35,20 @@
         text-align: center;
         border-radius: 10px 10px 0 0;
         background: #e7e9ee;
-        animation: fire 2s ease-in-out forwards;
-        animation-delay: 2s;
+        position: relative;
+        overflow: hidden;
     }
-
+    .confetti {
+        position: absolute;
+        background: url('../assets/confetty.svg');
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        top: 100%;
+        left: calc(50% - 25px);
+        animation: fire 2s ease-in-out forwards;
+        animation-delay: 1s;
+    }
     .logo {
         height: 62px;
         margin-bottom: 40px;
@@ -78,19 +89,16 @@
 
     @keyframes fire {
         0% {
-            background: #e7e9ee url('../assets/confetty.svg') 50% calc(100% + 50px);
-            background-repeat: no-repeat;
-            background-size: 10px;
+            top: 100%;
         }
         40% {
-            background: #e7e9ee url('../assets/confetty.svg') 50% 80%;
-            background-repeat: no-repeat;
-            background-size: 50px;
+            top: 20%;
         }
         100% {
-            background: #e7e9ee url('../assets/confetty.svg') 50%;
-            background-repeat: no-repeat;
-            background-size: 100%;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
         }
     }
 
