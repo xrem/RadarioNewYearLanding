@@ -48,6 +48,7 @@
         left: calc(50% - 25px);
         animation: fire 2s ease-in-out forwards;
         animation-delay: 1s;
+        z-index: 0;
     }
     .logo {
         height: 62px;
@@ -60,22 +61,30 @@
         width: 138px;
         height: 33px;
         background: url('../assets/logo.svg') center no-repeat;
+        position: relative;
+        z-index: 1;
     }
     .logo-cross {
         width: 15px;
         height: 15px;
         margin: 0 10px -10px;
         background: url('../assets/cross.svg') center no-repeat;
+        position: relative;
+        z-index: 1;
     }
     .logo-host {
         max-height: 33px;
         object-fit: contain;
         margin-bottom: -10px;
         border-radius: 50%;
+        position: relative;
+        z-index: 1;
     }
 
     .title {
         margin-bottom: 30px;
+        position: relative;
+        z-index: 1;
     }
 
     .subtitle {
@@ -85,6 +94,8 @@
         font-weight: 400;
         line-height: 30px;
         margin-bottom: 50px;
+        position: relative;
+        z-index: 1;
     }
 
     @keyframes fire {

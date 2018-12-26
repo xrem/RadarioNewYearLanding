@@ -129,6 +129,8 @@
         padding: 0 32px;
         cursor: pointer;
         transition: background .2s;
+        position: relative;
+        z-index: 1;
     }
     .btn:hover {
         background: #0b4fff;
